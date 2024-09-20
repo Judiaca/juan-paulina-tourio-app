@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import Form from "../components/Form.js";
 import { StyledLink } from "../components/StyledLink.js";
+import useSWR from "swr";
 
 const StyledBackLink = styled(StyledLink)`
   justify-self: flex-start;
@@ -10,9 +11,10 @@ const StyledBackLink = styled(StyledLink)`
 
 export default function CreatePlacePage() {
   const router = useRouter();
+  const { mutate } = useSWR("/api/places/");
 
   async function addPlace(place) {
-    const response = await fetch("/api/places", {
+    const response = await fetch("/api/places/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,10 +23,10 @@ export default function CreatePlacePage() {
     });
 
     if (response.ok) {
-      await response.json();
+      mutate(); // Formular wird mit neuen Daten aktualisiert bevor Umleitung auf Startseite
       router.push("/");
     } else {
-      console.error(response.status);
+      console.error("Error adding place: ", response.status);
     }
   }
 
