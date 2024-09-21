@@ -33,6 +33,22 @@ export default async function handler(request, response) {
 
     return response.status(200).json(updatedPlace);
   }
+
+  // **************************************************************************
+  // **************************************************************************
+
+  if (request.method === "DELETE") {
+    const deletedPlace = await Place.findByIdAndDelete(id);
+
+    if (!deletedPlace) {
+      return response.status(404).json({ error: "Place not found" });
+    }
+
+    return response.status(200).json({ message: "Place successfully deleted" });
+  }
+
+  // **************************************************************************
+  // **************************************************************************
 }
 
 // const place = db_places.find((place) => place._id.$oid === id);
