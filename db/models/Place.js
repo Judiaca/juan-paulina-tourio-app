@@ -7,7 +7,7 @@ const placeSchema = new Schema({
   image: { type: String, required: true },
   mapURL: { type: String, required: true },
   description: { type: String, required: true },
-  // comments: { type: Array, required: true },
+  comments: { type: Array, required: true },
   // comments: [
   //   {
   //     type: mongoose.Schema.Types.ObjectId, // Referenz auf Kommentardokumente

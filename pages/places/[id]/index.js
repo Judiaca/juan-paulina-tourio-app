@@ -39,12 +39,14 @@ export default function DetailsPage() {
   //   error,
   // } = useSWR(`/api/places/${id}`);
   // -> comments erst mal entfernt, sonst: "TypeError: place is undefined":
-  const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
+  // const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
+  const { data, isLoading, error } = useSWR(id ? `/api/places/${id}` : null);
 
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  // if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  if (!isReady || isLoading) return <h2>Loading...</h2>;
+  if (error) return <h2>Error loading data</h2>;
 
-  // **************************************************************************
-  // **************************************************************************
+  const { place, comments } = data;
 
   async function deletePlace() {
     const response = await fetch(`/api/places/${id}`, {
@@ -58,9 +60,6 @@ export default function DetailsPage() {
       console.error("Error deleting place: ", response.status);
     }
   }
-
-  // **************************************************************************
-  // **************************************************************************
 
   return (
     <>
@@ -93,7 +92,7 @@ export default function DetailsPage() {
           Delete
         </StyledButton>
       </ButtonContainer>
-      {/* <Comments locationName={place.name} comments={comments} /> */}
+      <Comments locationName={place.name} comments={comments} />
     </>
   );
 }
