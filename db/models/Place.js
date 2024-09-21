@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
-
 const placeSchema = new Schema({
-  name: {
-    type: String,
-  },
-  location: {
-    type: String,
-  },
-  image: { type: String },
-  mapURL: { type: String },
-  description: { type: String },
+  name: { type: String, required: true },
+  location: { type: String, required: true },
+  image: { type: String, required: true },
+  mapURL: { type: String, required: true },
+  description: { type: String, required: true },
+  // comments: { type: Array, required: true },
   // comments: [
   //   {
   //     type: mongoose.Schema.Types.ObjectId, // Referenz auf Kommentardokumente
@@ -21,5 +17,4 @@ const placeSchema = new Schema({
 });
 
 const Place = mongoose.models.Place || mongoose.model("Place", placeSchema);
-
 export default Place;
