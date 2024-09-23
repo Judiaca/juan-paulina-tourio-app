@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FormContainer, Input, Label } from "./Form";
-import { StyledButton } from "./StyledButton.js";
+import { StyledButton, StyledButtonDelete } from "./StyledButton.js";
 import { useState } from "react";
 import { mutate } from "swr";
 
@@ -17,8 +17,6 @@ export default function Comments({ locationName, comments, placeId }) {
       place: placeId,
     };
 
-    // console.log("NEW COMMENT:", newComment);
-
     const response = await fetch("/api/comments", {
       method: "POST",
       headers: {
@@ -33,6 +31,20 @@ export default function Comments({ locationName, comments, placeId }) {
       mutate(`/api/places/${placeId}`);
     } else {
       console.error("Error adding comment");
+    }
+  }
+
+  async function handleDeleteComment(commentId) {
+    const response = await fetch(`/api/comments?commentId=${commentId}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      alert("Comment successfully deleted.");
+      mutate(`/api/places/${placeId}`);
+      // onDelete(commentId);
+    } else {
+      console.error("Error deleting comment");
     }
   }
 
@@ -60,16 +72,23 @@ export default function Comments({ locationName, comments, placeId }) {
       {comments && comments.length > 0 && (
         <>
           <h1> {comments.length} fans commented on this place:</h1>
-          {comments.map(({ name, comment }, idx) => {
+          {comments.map(({ _id, name, comment }) => {
             return (
-              <>
-                <p key={idx}>
+              <CommentContainer key={_id}>
+                {/* <p key={_id}> */}
+                <p>
                   <small>
                     <strong>{name}</strong> commented on {locationName}
                   </small>
                 </p>
                 <span>{comment}</span>
-              </>
+                <StyledButtonDelete
+                  type="button"
+                  onClick={() => handleDeleteComment(_id)}
+                >
+                  Delete
+                </StyledButtonDelete>
+              </CommentContainer>
             );
           })}
         </>
@@ -86,8 +105,33 @@ const Article = styled.article`
   border-radius: 0.8rem;
   padding: 0.5rem;
   text-align: center;
+`;
+
+const CommentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  align-items: center;
+  width: 100%;
+  // padding: 20px;
+  margin: 10px 0;
+
   p {
+    // flex-grow: 1;
     border-bottom: solid 1px black;
-    padding: 20px;
+    padding-right: 20px;
+    text-align: center;
+  }
+
+  button {
+    margin-left: 20px;
+  }
+
+  span {
+    flex-grow: 1; // Allows the span to expand and take available space
+    text-align: center;
+    padding-right: 20px; // Add some space between the text and the button
   }
 `;
