@@ -29,9 +29,23 @@ export default function Form({ onSubmit, formName, defaultData }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onSubmit(data);
 
-    // console.log(data);
+    if (!isValidImageUrl(data.image)) {
+      alert("Please enter a valid image URL.");
+      return;
+    }
+
+    onSubmit(data);
+  }
+
+  function isValidImageUrl(url) {
+    if (!url) {
+      alert("Please enter a valid image URL.");
+      return;
+    }
+
+    const urlExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp"];
+    return url && urlExtensions.some((ext) => url.includes(ext));
   }
 
   return (
@@ -50,6 +64,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
         name="image"
         type="text"
         defaultValue={defaultData?.image}
+        // required
       />
       <Label htmlFor="location">Location</Label>
       <Input

@@ -17,3 +17,14 @@ export const StyledButton = styled.button`
       color: white;
     `}
 `;
+
+export const StyledButtonDelete = styled.button`
+  background-color: firebrick;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  font-size: inherit;
+`;
