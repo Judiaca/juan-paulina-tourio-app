@@ -42,7 +42,6 @@ export default function Comments({ locationName, comments, placeId }) {
     if (response.ok) {
       alert("Comment successfully deleted.");
       mutate(`/api/places/${placeId}`);
-      // onDelete(commentId);
     } else {
       console.error("Error deleting comment");
     }
@@ -75,7 +74,6 @@ export default function Comments({ locationName, comments, placeId }) {
           {comments.map(({ _id, name, comment }) => {
             return (
               <CommentContainer key={_id}>
-                {/* <p key={_id}> */}
                 <p>
                   <small>
                     <strong>{name}</strong> commented on {locationName}
