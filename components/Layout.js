@@ -9,6 +9,9 @@ const Main = styled.main`
   padding: 0.5rem;
   position: relative;
   width: 100%;
+
+  background-color: #1a2b4c;
+  color: #f5f5f5;
 `;
 
 export default function Layout({ children }) {

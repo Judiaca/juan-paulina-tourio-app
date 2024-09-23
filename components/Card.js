@@ -3,9 +3,15 @@ import styled from "styled-components";
 import { StyledImage } from "./StyledImage.js";
 
 const Article = styled.article`
-  border: 5px solid black;
+  border: 3px solid #cccccc;
   border-radius: 0.8rem;
   padding: 0.5rem;
+
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #1a2b4c;
+  color: white;
 `;
 
 const ImageContainer = styled.div`
