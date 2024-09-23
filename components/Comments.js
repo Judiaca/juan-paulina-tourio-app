@@ -80,6 +80,7 @@ export default function Comments({ locationName, comments, placeId }) {
                   </small>
                 </p>
                 <span>{comment}</span>
+
                 <StyledButtonDelete
                   type="button"
                   onClick={() => handleDeleteComment(_id)}
@@ -108,28 +109,21 @@ const Article = styled.article`
 const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
-
   justify-content: space-between;
-
   align-items: center;
   width: 100%;
-  // padding: 20px;
-  margin: 10px 0;
 
+  // USER:
   p {
-    // flex-grow: 1;
     border-bottom: solid 1px black;
-    padding-right: 20px;
     text-align: center;
+    margin-bottom: 10px;
   }
 
-  button {
-    margin-left: 20px;
-  }
-
+  // COMMENT:
   span {
-    flex-grow: 1; // Allows the span to expand and take available space
-    text-align: center;
-    padding-right: 20px; // Add some space between the text and the button
+    word-break: break-word;
+    max-width: 80%;
+    margin-bottom: 10px;
   }
 `;
