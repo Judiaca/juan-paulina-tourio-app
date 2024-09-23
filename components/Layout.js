@@ -10,9 +10,8 @@ const Main = styled.main`
   position: relative;
   width: 100%;
 
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: #1a2b4c;
+  color: #f5f5f5;
 `;
 
 export default function Layout({ children }) {

@@ -100,7 +100,7 @@ const Article = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 5px solid black;
+  border: 5px solid lightgrey;
   border-radius: 0.8rem;
   padding: 0.5rem;
   text-align: center;
@@ -112,6 +112,10 @@ const CommentContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  background-color: white;
+  color: #1a2b4c;
+  margin-bottom: 10px;
+  border-radius: 10px;
 
   // USER:
   p {
@@ -124,6 +128,10 @@ const CommentContainer = styled.div`
   span {
     word-break: break-word;
     max-width: 80%;
+    margin-bottom: 10px;
+  }
+
+  button {
     margin-bottom: 10px;
   }
 `;
