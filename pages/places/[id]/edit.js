@@ -10,6 +10,8 @@ export default function EditPage() {
   const { id } = router.query;
   const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
 
+  // console.log("PLACE DATA:", place);
+
   async function editPlace(updatedPlace) {
     const response = await fetch(`/api/places/${id}`, {
       method: "PATCH",
@@ -34,7 +36,11 @@ export default function EditPage() {
       <Link href={`/places/${id}`} passHref legacyBehavior>
         <StyledLink justifySelf="start">back</StyledLink>
       </Link>
-      <Form onSubmit={editPlace} formName={"edit-place"} defaultData={place} />
+      <Form
+        onSubmit={editPlace}
+        formName={"edit-place"}
+        defaultData={place.place}
+      />
     </>
   );
 }
